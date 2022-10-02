@@ -37,6 +37,8 @@ model UserMaps {
   name   String
   status Status
   path   String
+
+  @@unique([userId, uf])
 }
 
 enum Status {

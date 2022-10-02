@@ -2,8 +2,9 @@ import { prisma } from "../database/database";
 import { UserMapsData } from "../types/userMapTypes";
 
 async function findByUserId(userId: number) {
+  console.log(userId);
   return prisma.userMaps.findMany({
-    where: { userId },
+    where: { userId: userId },
   });
 }
 
@@ -25,4 +26,22 @@ async function createUserMap(userId: number) {
   );
 }
 
-export { createUserMap, findByUserId };
+async function updateMap(userId: number, userMaps: UserMapsData[]) {
+  await prisma.$transaction(
+    userMaps.map((cur, index) =>
+      prisma.userMaps.update({
+        where: {
+          userId_uf: {
+            userId: userId,
+            uf: cur.uf,
+          },
+        },
+        data: {
+          status: cur.status,
+        },
+      })
+    )
+  );
+}
+
+export { createUserMap, findByUserId, updateMap };
