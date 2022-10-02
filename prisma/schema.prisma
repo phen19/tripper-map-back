@@ -9,3 +9,38 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
+  password String
+  UserMaps UserMaps[]
+
+  @@map("users")
+}
+
+model States {
+  id     Int    @id @default(autoincrement())
+  uf     String @unique
+  name   String
+  status Status
+  path   String
+
+  @@map("states")
+}
+
+model UserMaps {
+  id     Int    @id @default(autoincrement())
+  users  Users  @relation(fields: [userId], references: [id])
+  userId Int
+  uf     String
+  name   String
+  status Status
+  path   String
+}
+
+enum Status {
+  gone
+  wishlist
+  available
+}
