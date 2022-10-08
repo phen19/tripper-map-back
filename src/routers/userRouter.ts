@@ -7,12 +7,12 @@ const userRouter = Router();
 
 userRouter.post(
   "/signup",
-  schemaValidator(schemas.userSchema),
+  schemaValidator(schemas.signUpSchema),
   userController.signUp
 );
 userRouter.post(
   "/signin",
-  schemaValidator(schemas.userSchema),
+  schemaValidator(schemas.signInSchema),
   userController.signIn
 );
 

@@ -4,7 +4,6 @@ import { userCheck } from "../utils/utils";
 
 async function getMapByUserId(userId: number) {
   await userCheck(userId);
-  console.log(userId);
   const result = await mapRepository.findByUserId(userId);
   return result;
 }
