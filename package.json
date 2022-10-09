@@ -7,7 +7,7 @@
     "test:integration": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed && dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/integration",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit",
     "build": "tsc",
-    "start": "ts-node src/server.ts",
+    "start": "npx prisma generate && npx prisma migrate deploy && node dist/src/server.ts",
     "dev": "nodemon src/server.ts",
     "dev:test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed && dotenv -e .env.test nodemon src/server.ts"
   },
