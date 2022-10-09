@@ -2,7 +2,6 @@ import { prisma } from "../database/database";
 import { UserMapsData } from "../types/userMapTypes";
 
 async function findByUserId(userId: number) {
-  console.log(userId);
   return prisma.userMaps.findMany({
     where: { userId: userId },
   });
